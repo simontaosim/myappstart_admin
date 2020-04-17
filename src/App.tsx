@@ -1,26 +1,23 @@
+// in src/App.tsx
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser  } from 'react-admin';
+import { UserList } from './users';
+import { PostList, PostEdit, PostCreate } from './posts';
+import PostIcon from '@material-ui/icons/Book';
+import UserIcon from '@material-ui/icons/Group';
+import Dashboard from './Dashboard';
+import AuthProvider from './AuthProvider';
+import simpleRestProvider from 'ra-data-simple-rest';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const dataProvider = simpleRestProvider('http://localhost:8080')
+function App (){
+  return <Admin authProvider={AuthProvider} dataProvider={dataProvider} dashboard={Dashboard}>
+  <Resource name="users" list={UserList}  icon={PostIcon}  />
+  <Resource name="posts"  list={PostList} edit={PostEdit} create={PostCreate} icon={UserIcon}/>
+  <Resource name="roles"  list={ListGuesser} edit={EditGuesser} show={ShowGuesser}  icon={UserIcon}/>
+  <Resource name="permissions"  list={ListGuesser} edit={EditGuesser} show={ShowGuesser}  icon={UserIcon}/>
+</Admin>;
+} 
+
 
 export default App;
