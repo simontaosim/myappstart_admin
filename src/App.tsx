@@ -7,9 +7,8 @@ import PostIcon from '@material-ui/icons/Book';
 import UserIcon from '@material-ui/icons/Group';
 import Dashboard from './Dashboard';
 import AuthProvider from './AuthProvider';
-import simpleRestProvider from 'ra-data-simple-rest';
+import dataProvider from './dataProvider';
 
-const dataProvider = simpleRestProvider('http://localhost:8080')
 function App (){
   return <Admin authProvider={AuthProvider} dataProvider={dataProvider} dashboard={Dashboard}>
   <Resource name="users" list={UserList}  icon={PostIcon}  />
