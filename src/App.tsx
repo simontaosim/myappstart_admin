@@ -1,22 +1,68 @@
-// in src/App.tsx
 import React from 'react';
-import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser  } from 'react-admin';
-import { UserList } from './users';
-import { PostList, PostEdit, PostCreate } from './posts';
-import PostIcon from '@material-ui/icons/Book';
-import UserIcon from '@material-ui/icons/Group';
-import Dashboard from './Dashboard';
-import AuthProvider from './AuthProvider';
-import dataProvider from './dataProvider';
+import { Admin, Resource } from 'react-admin';
+import polyglotI18nProvider from 'ra-i18n-polyglot';
 
-function App (){
-  return <Admin authProvider={AuthProvider} dataProvider={dataProvider} dashboard={Dashboard}>
-  <Resource name="users" list={UserList}  icon={PostIcon}  />
-  <Resource name="posts"  list={PostList} edit={PostEdit} create={PostCreate} icon={UserIcon}/>
-  <Resource name="roles"  list={ListGuesser} edit={EditGuesser} show={ShowGuesser}  icon={UserIcon}/>
-  <Resource name="permissions"  list={ListGuesser} edit={EditGuesser} show={ShowGuesser}  icon={UserIcon}/>
-</Admin>;
-} 
+import './App.css';
 
+import authProvider from './authProvider';
+import themeReducer from './themeReducer';
+import { Login, Layout } from './layout';
+import { Dashboard } from './dashboard';
+import customRoutes from './routes';
+import chineseMessages from './i18n/cn';
+
+import visitors from './visitors';
+import orders from './orders';
+import products from './products';
+import invoices from './invoices';
+import categories from './categories';
+import reviews from './reviews';
+
+import dataProvider from './dataProvider/rest';
+
+const i18nProvider = polyglotI18nProvider(locale => {
+    if (locale === 'en') {
+        return import('./i18n/en').then(messages => messages.default);
+    }
+
+    // Always fallback on chinese
+    return  chineseMessages;
+}, 'cn');
+
+const App = () => {
+
+    if (!dataProvider) {
+        return (
+            <div className="loader-container">
+                <div className="loader">Loading...</div>
+            </div>
+        );
+    }
+
+    return (
+        <Admin
+            title=""
+            dataProvider={dataProvider}
+            customReducers={{ theme: themeReducer }}
+            customRoutes={customRoutes}
+            authProvider={authProvider}
+            dashboard={Dashboard}
+            loginPage={Login}
+            layout={Layout}
+            i18nProvider={i18nProvider}
+        >
+            <Resource name="customers" {...visitors} />
+            <Resource
+                name="commands"
+                {...orders}
+                options={{ label: 'Orders' }}
+            />
+            <Resource name="invoices" {...invoices} />
+            <Resource name="products" {...products} />
+            <Resource name="categories" {...categories} />
+            <Resource name="reviews" {...reviews} />
+        </Admin>
+    );
+};
 
 export default App;
