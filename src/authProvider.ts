@@ -39,7 +39,7 @@ export default {
     },
     // called when the API returns an error
     checkError: ({ status }: ICheckErrorParams) => {
-        if (status === 401 || status === 403) {
+        if (status === 401) {
             localStorage.removeItem('token');
             localStorage.removeItem('userId');
             return Promise.reject();

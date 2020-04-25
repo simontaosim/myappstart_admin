@@ -1,5 +1,5 @@
 import React from 'react';
-import { Admin, Resource } from 'react-admin';
+import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser } from 'react-admin';
 import polyglotI18nProvider from 'ra-i18n-polyglot';
 
 import './App.css';
@@ -13,12 +13,11 @@ import chineseMessages from './i18n/cn';
 
 import visitors from './visitors';
 import orders from './orders';
-import products from './products';
-import invoices from './invoices';
-import categories from './categories';
-import reviews from './reviews';
 
 import dataProvider from './dataProvider/rest';
+import users from './users';
+import roles from './roles';
+import permissions from './permissions';
 
 const i18nProvider = polyglotI18nProvider(locale => {
     if (locale === 'en') {
@@ -57,10 +56,10 @@ const App = () => {
                 {...orders}
                 options={{ label: 'Orders' }}
             />
-            <Resource name="invoices" {...invoices} />
-            <Resource name="products" {...products} />
-            <Resource name="categories" {...categories} />
-            <Resource name="reviews" {...reviews} />
+            <Resource name="users" list={users.list}  edit={EditGuesser} show={ShowGuesser}/>
+            <Resource name="roles" list={roles.list}  edit={roles.edit} create={roles.create} show={ShowGuesser}/>
+            <Resource name="permissions" list={permissions.list}  edit={permissions.edit} create={permissions.create} show={ShowGuesser}/>
+            <Resource name="posts" list={ListGuesser}  edit={EditGuesser} show={ShowGuesser}/>
         </Admin>
     );
 };

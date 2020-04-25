@@ -3,6 +3,11 @@ import englishMessages from 'ra-language-chinese';
 
 const customEnglishMessages: TranslationMessages = {
     ...englishMessages,
+    "Forbidden": "缺少权限",
+    'Failed to fetch': "与服务器连接失败",
+    resource_names: {
+        posts: "文章",
+    },
     pos: {
         search: '搜索',
         configuration: '设置',
@@ -34,6 +39,7 @@ const customEnglishMessages: TranslationMessages = {
             sales: 'Sales',
             catalog: 'Catalog',
             customers: 'Customers',
+            permissions: "权限管理"
         },
     },
     resources: {
@@ -68,7 +74,37 @@ const customEnglishMessages: TranslationMessages = {
          
         },
         users: {
-            name: "用户管理"
+            name: "用户",
+            fields: {
+                username: '用户名',
+                updatedDate: "更新于",
+                createdDate: '创建于'
+            },
+        },
+        permissions: {
+            name: "权限",
+            fields: {
+                resource: '资源',
+                updatedDate: "更新于",
+                createdDate: '创建于',
+                get: "列表",
+                put: "更新",
+                post: "新建",
+                remove: '删除',
+                grant: "授权",
+                roleId: "角色"
+            },
+        },
+        roles: {
+            name: "角色",
+            fields: {
+                name_zh: '角色名',
+                updatedDate: "更新于",
+                createdDate: '创建于'
+            },
+        },
+        posts: {
+            name: "文章"
         },
         commands: {
             name: 'Order |||| Orders',
