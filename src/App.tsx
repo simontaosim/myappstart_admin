@@ -7,7 +7,7 @@ import './App.css';
 import authProvider from './authProvider';
 import themeReducer from './themeReducer';
 import { Login, Layout } from './layout';
-import { Dashboard } from './dashboard';
+import dashboard  from './dashboard';
 import customRoutes from './routes';
 import chineseMessages from './i18n/cn';
 
@@ -45,7 +45,7 @@ const App = () => {
             customReducers={{ theme: themeReducer }}
             customRoutes={customRoutes}
             authProvider={authProvider}
-            dashboard={Dashboard}
+            dashboard={dashboard}
             loginPage={Login}
             layout={Layout}
             i18nProvider={i18nProvider}
