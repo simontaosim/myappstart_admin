@@ -1,5 +1,5 @@
 // in src/authProvider.ts
-const apiUrl = "http://localhost:8080";
+const apiUrl = "https://jfppin-qxywhg-8080.preview.myide.io";
 interface ILoginParams {
     username: string,
     password: string,
