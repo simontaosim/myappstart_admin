@@ -7,7 +7,7 @@ import './App.css';
 import authProvider from './authProvider';
 import themeReducer from './themeReducer';
 import { Login, Layout } from './layout';
-import dashboard  from './dashboard';
+import * as dashboard  from './dashboard';
 import customRoutes from './routes';
 import chineseMessages from './i18n/cn';
 
