@@ -15,6 +15,7 @@ const ResourceNameField = ({ source, record = {} }:any) => {
 }
 
 export default (props:any) => {
+    console.log(props);
     const locale = useLocale();
     return (
         <List {...props}>

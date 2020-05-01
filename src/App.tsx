@@ -56,7 +56,7 @@ const App = () => {
                 {...orders}
                 options={{ label: 'Orders' }}
             />
-            <Resource name="users" list={users.list}  edit={EditGuesser} show={ShowGuesser}/>
+            <Resource name="users" list={users.list}  edit={users.edit} show={ShowGuesser}/>
             <Resource name="roles" list={roles.list}  edit={roles.edit} create={roles.create} show={ShowGuesser}/>
             <Resource name="permissions" list={permissions.list}  edit={permissions.edit} create={permissions.create} show={ShowGuesser}/>
             <Resource name="posts" list={ListGuesser}  edit={EditGuesser} show={ShowGuesser}/>

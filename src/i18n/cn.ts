@@ -109,7 +109,7 @@ const customEnglishMessages: TranslationMessages = {
             sign_in: '登录',
             sign_in_error: '验证失败, 请重试',
             logout: '退出',
-            auth_check_error: "会话过期，请重新登录"
+            auth_check_error: "会话过期，请重新登录",
         },
         notification: {
             updated: '条目已更新 |||| %{smart_count} 项条目已更新',
@@ -210,7 +210,8 @@ const customEnglishMessages: TranslationMessages = {
             fields: {
                 username: '用户名',
                 updatedDate: "更新于",
-                createdDate: '创建于'
+                createdDate: '创建于',
+                roleIds: "角色"
             },
         },
         permissions: {
