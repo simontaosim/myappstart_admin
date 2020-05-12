@@ -1,6 +1,11 @@
 import { TranslationMessages } from 'ra-core';
 
 const customEnglishMessages: TranslationMessages = {
+    PASSWORD_REPEAT_WRONG: '两次密码不一致',
+    USERNAME_ALREADY_EXIST: '用户名已存在',
+    BODY_REQUIRE_MORE_THAN_50: "文章内容需要多于50个字符",
+    BODY_REQUIRED: '文章内容不得为空',
+    TITLE_REQUIRED: '文章标题不得为空',
     ra: {
         action: {
             delete: '删除',
@@ -175,6 +180,13 @@ const customEnglishMessages: TranslationMessages = {
         },
     },
     resources: {
+        tags: {
+            name: '标签',
+            fields: {
+                name_zh: "标签名",
+                updatedDate: "更新于"
+            }
+        },
         customers: {
             name: 'Customer |||| Customers',
             fields: {
@@ -211,7 +223,30 @@ const customEnglishMessages: TranslationMessages = {
                 username: '用户名',
                 updatedDate: "更新于",
                 createdDate: '创建于',
-                roleIds: "角色"
+                roleIds: "角色",
+                password: "密码",
+                passwordRepeat: "重复密码"
+            },
+            tabs: {
+                grant: "授权",
+                resetPassword: '重置密码'
+            }
+        },
+        posts: {
+            name: "文章",
+            fields: {
+                title: '标题',
+                cover: "封面",
+                updatedDate: "更新于",
+                createdDate: '创建于',
+                tagIds: "标签",
+                authorId: "作者",
+                body: "正文"
+            },
+            tabs: {
+                cover: '封面',
+                body: '编辑正文',
+                title: '标题及其他',
             },
         },
         permissions: {
@@ -220,7 +255,7 @@ const customEnglishMessages: TranslationMessages = {
                 resource: '资源',
                 updatedDate: "更新于",
                 createdDate: '创建于',
-                get: "列表",
+                get: "访问",
                 put: "更新",
                 post: "新建",
                 remove: '删除',
@@ -235,9 +270,6 @@ const customEnglishMessages: TranslationMessages = {
                 updatedDate: "更新于",
                 createdDate: '创建于'
             },
-        },
-        posts: {
-            name: "文章"
         },
         commands: {
             name: 'Order |||| Orders',

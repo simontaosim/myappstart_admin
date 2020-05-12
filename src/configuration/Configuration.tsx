@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button';
 import { useTranslate, useLocale, useSetLocale, Title } from 'react-admin';
 import { makeStyles } from '@material-ui/core/styles';
@@ -63,6 +64,7 @@ const Configuration = () => {
                     中文
                 </Button>
             </CardContent>
+           
         </Card>
     );
 };

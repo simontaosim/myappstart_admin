@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { useMediaQuery, Theme } from '@material-ui/core';
 import { useTranslate, DashboardMenuItem, MenuItemLink } from 'react-admin';
-
-import permissions from '../permissions';
+import { usePermissions } from 'react-admin';
+import permissionsResource from '../permissions';
 import SubMenu from './SubMenu';
 import { AppState } from '../types';
 import roles from '../roles';
@@ -28,42 +28,78 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
     useSelector((state: AppState) => state.theme); // force rerender on theme change
 
     const handleToggle = (menu: string) => {
-        setState((state:any) => ({ ...state, [menu]: !state[menu] }));
+        setState((state: any) => ({ ...state, [menu]: !state[menu] }));
     };
+    const { permissions } = usePermissions();
 
     return (
         <div>
             {' '}
             <DashboardMenuItem onClick={onMenuClick} sidebarIsOpen={open} />
-            <MenuItemLink
-                to={`/posts`}
-                primaryText={translate(`resources.posts.name`, {
-                    smart_count: 2,
-                })}
-                leftIcon={<posts.icon />}
-                onClick={onMenuClick}
-                sidebarIsOpen={open}
-                dense={dense}
-            />
-             <MenuItemLink
-                to={`/users`}
-                primaryText={translate(`resources.users.name`, {
-                    smart_count: 2,
-                })}
-                leftIcon={<users.icon />}
-                onClick={onMenuClick}
-                sidebarIsOpen={open}
-                dense={dense}
-            />
-            <SubMenu
+            {
+                permissions && (permissions.includes("superAdmin") || permissions.includes("get_posts"))
+                &&
+                <MenuItemLink
+                    to={`/posts`}
+                    primaryText={translate(`resources.posts.name`, {
+                        smart_count: 2,
+                    })}
+                    leftIcon={<posts.icon />}
+                    onClick={onMenuClick}
+                    sidebarIsOpen={open}
+                    dense={dense}
+                />
+            }
+            {
+                 permissions && (permissions.includes("superAdmin") || permissions.includes("get_tags"))
+                 &&
+                 <MenuItemLink
+                 to={`/tags`}
+                 primaryText={translate(`resources.tags.name`, {
+                     smart_count: 2,
+                 })}
+                 leftIcon={<posts.icon />}
+                 onClick={onMenuClick}
+                 sidebarIsOpen={open}
+                 dense={dense}
+             />
+            }
+            
+           {
+                permissions && (permissions.includes("superAdmin") || permissions.includes("get_users"))
+                 &&
+                 <MenuItemLink
+                 to={`/users`}
+                 primaryText={translate(`resources.users.name`, {
+                     smart_count: 2,
+                 })}
+                 leftIcon={<users.icon />}
+                 onClick={onMenuClick}
+                 sidebarIsOpen={open}
+                 dense={dense}
+             />
+           }
+           {
+                permissions && (
+                    permissions.includes("superAdmin") 
+                    || 
+                    permissions.includes("get_permissions")
+                    ||
+                    permissions.includes("get_roles")
+                    )
+                &&
+                <SubMenu
                 handleToggle={() => handleToggle('menuPermissions')}
                 isOpen={state.menuPermissions}
                 sidebarIsOpen={open}
                 name="pos.menu.permissions"
-                icon={<permissions.icon />}
+                icon={<permissionsResource.icon />}
                 dense={dense}
             >
-                <MenuItemLink
+                {
+                     (permissions.includes("superAdmin") || permissions.includes("get_roles"))
+                     &&
+                     <MenuItemLink
                     to={`/roles`}
                     primaryText={translate(`resources.roles.name`, {
                         smart_count: 2,
@@ -73,20 +109,30 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                     sidebarIsOpen={open}
                     dense={dense}
                 />
-                <MenuItemLink
+                }
+                {
+                    (permissions.includes("superAdmin") || permissions.includes("get_permissions"))
+                    &&
+                    <MenuItemLink
                     to={`/permissions`}
                     primaryText={translate(`resources.permissions.name`, {
                         smart_count: 2,
                     })}
-                    leftIcon={<permissions.icon />}
+                    leftIcon={<permissionsResource.icon />}
                     onClick={onMenuClick}
                     sidebarIsOpen={open}
                     dense={dense}
                 />
+                }
+                
+              
             </SubMenu>
+           }
+           
             
-            
-             
+
+
+
             {isXSmall && (
                 <MenuItemLink
                     to="/configuration"

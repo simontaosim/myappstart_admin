@@ -4,13 +4,14 @@ import {
     DateField,
     List,
     TextField,
-    useLocale
+    useLocale,
 
 } from 'react-admin';
 export default (props:any) => {
     const locale = useLocale();
+
     return (
-        <List {...props}>
+        <List {...props}   sort={{ field: 'id', order: 'DESC' }}>
             <Datagrid rowClick="edit">
                 {
                     locale === 'cn' ? 

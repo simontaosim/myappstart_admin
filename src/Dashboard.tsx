@@ -1,12 +1,38 @@
 // in src/Dashboard.tsx
-import React from 'react';
+import React, { useEffect } from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
+import { createChart } from 'lightweight-charts';
 
-export default (props:any) => (
-    <Card>
-        <CardHeader title="" />
-        <CardContent>欢迎进入</CardContent>
-    </Card>
-);
+export default (props:any) => {
+    useEffect(()=>{
+        if(window.document){
+            const chart:any = createChart(document.getElementById("chatDemo") as HTMLElement, { width: 400, height: 300 });
+            const lineSeries = chart.addLineSeries();
+            lineSeries.setData([
+                { time: '2019-04-11', value: 80.01 },
+                { time: '2019-04-12', value: 96.63 },
+                { time: '2019-04-13', value: 76.64 },
+                { time: '2019-04-14', value: 81.89 },
+                { time: '2019-04-15', value: 74.43 },
+                { time: '2019-04-16', value: 80.01 },
+                { time: '2019-04-17', value: 96.63 },
+                { time: '2019-04-18', value: 76.64 },
+                { time: '2019-04-19', value: 81.89 },
+                { time: '2019-04-20', value: 74.43 },
+            ]);
+        }
+        
+    })
+    return (
+        <Card>
+            <CardHeader title="" />
+            <CardContent>
+                <div id="chatDemo">
+                    
+                </div>
+            </CardContent>
+        </Card>
+    );
+}

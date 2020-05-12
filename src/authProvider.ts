@@ -1,5 +1,7 @@
+import { SERVER_ORIGIN } from "./constants";
+
 // in src/authProvider.ts
-const apiUrl = "http://localhost:8080";
+const apiUrl = SERVER_ORIGIN;
 interface ILoginParams {
     username: string,
     password: string,
@@ -68,5 +70,23 @@ export default {
 
     },
     // called when the user navigates to a new location, to check for permissions / roles
-    getPermissions: () => Promise.resolve(),
+    getPermissions: () => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            headers["Authorization"] = `Bearer ${token}`
+        }
+        return fetch(`${apiUrl}/get_permissions`, {
+            headers, method: "GET"
+        }).then((response: Response) => {
+            return response.json();
+        }).then((data: any) => {
+            if (data.isLogined) {
+                return Promise.resolve(data.permissions);
+            } else {
+                localStorage.removeItem('token')
+                return Promise.reject();
+            }
+
+        })
+    },
 };

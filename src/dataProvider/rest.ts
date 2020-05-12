@@ -1,7 +1,8 @@
 import { fetchUtils } from 'react-admin';
 import { stringify } from 'query-string';
+import { SERVER_ORIGIN } from '../constants';
 
-const apiUrl = 'http://localhost:8080';
+const apiUrl = SERVER_ORIGIN;
 const httpClient = (url:string, options = {} as any) => {
     if (!options.headers) {
         options.headers = new Headers({ Accept: 'application/json' });
@@ -60,28 +61,9 @@ export default {
     getList: (resource:string, params: IGetListParams) => {
         const { page, perPage } = params.pagination;
         const { field, order } = params.sort;
-        let sort =  ()  => {
-            if(field==="id"){
-                if(order === "ASC"){
-                    return {
-                        field: "id",
-                        order: 'DESC',
-                    }
-                }
-                if(order === "DESC"){
-                    return {
-                        field: "id",
-                        order: "ASC"
-                    }
-                }
-            }
-            return {
-                field,
-                order,
-            }
-        } 
+
         const query = {
-            sort: JSON.stringify([sort().field, sort().order]),
+            sort: JSON.stringify([field, order]),
             range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
             filter: JSON.stringify(params.filter),
         };
@@ -129,7 +111,10 @@ export default {
         httpClient(`${apiUrl}/${resource}/${params.id}`, {
             method: 'PUT',
             body: JSON.stringify(params.data),
-        }).then(({ json }: any) => ({ data: json })),
+        }).then(({ json }: any) => {
+          
+            return { data: json }
+        }),
 
     updateMany: (resource:string, params: IUpdateManyParams) => {
         const query = {
@@ -145,10 +130,16 @@ export default {
         httpClient(`${apiUrl}/${resource}`, {
             method: 'POST',
             body: JSON.stringify(params.data),
-        }).then(({ json }:any) => ({
-            data: { ...params.data, id: json.id },
-        })),
-
+        }).then(({ json }:any) => {
+            const {code, reason, id } = json;
+            if(code  && code.includes('create:fail')){
+                throw new Error(reason);
+            }
+            return {
+                data: { ...params.data, id },
+                id: json.id
+            }
+        }),
     delete: (resource:string, params: IGetOneParams) =>
         httpClient(`${apiUrl}/${resource}/${params.id}`, {
             method: 'DELETE',

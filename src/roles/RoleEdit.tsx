@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    Edit, SimpleForm, TextInput, useLocale
+    Edit, SimpleForm, TextInput, useLocale,required
 } from 'react-admin'
 
 export default (props:any) => {
@@ -11,9 +11,9 @@ export default (props:any) => {
             <SimpleForm>
                 {
                     locale === "cn" ? 
-                    <TextInput source="name_zh" />
+                    <TextInput source="name_zh"  validate={required()} />
                     :
-                    <TextInput source="name" />
+                    <TextInput source="name" validate={required()} />
                 }
             </SimpleForm>
         </Edit>

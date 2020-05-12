@@ -11,7 +11,7 @@ export default (props:any) => {
             <SimpleForm>
                 {
                     locale === "cn" ? 
-                    <TextInput source="name_zh"  validate={required()} />
+                    <TextInput source="name_zh" validate={required()}  />
                     :
                     <TextInput source="name"  validate={required()} />
                 }

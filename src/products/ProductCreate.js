@@ -51,7 +51,7 @@ const ProductCreate = props => {
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
-                                    €
+                                    â‚¬
                                 </InputAdornment>
                             ),
                         }}
