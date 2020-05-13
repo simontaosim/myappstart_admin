@@ -26,7 +26,7 @@ const QuickFilter = ({ label }) => {
 };
 
 export const ProductFilter = props => (
-    <Filter {...props}>
+    <Filter {...props}    sort={{ field: 'id', order: 'DESC' }}>
         <SearchInput source="q" alwaysOn />
         <ReferenceInput
             source="category_id"

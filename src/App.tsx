@@ -60,13 +60,15 @@ const App = () => {
                     const get_permissions = permissions.includes("get_permissions");
                     const get_posts = permissions.includes("get_posts");
                     const get_tags = permissions.includes("get_tags");
+                    const put_roles= permissions.includes("put_roles");
+                    const post_roles= permissions.includes("post_roles");
                     const get_roles = permissions.includes("get_roles");
                     const put_tags = permissions.includes('put_tags');
                     const post_tags = permissions.includes('post_tags');
                     return [
                         (superAdmin || get_customers) &&<Resource name="customers" {...visitors} />,
                         (superAdmin || get_users) &&<Resource name="users" list={users.list}  edit={users.edit} show={users.show} create={users.create} />,
-                        (superAdmin || get_roles) &&<Resource name="roles" list={roles.list}  edit={roles.edit} create={roles.create} show={ShowGuesser}/>,
+                        (superAdmin || get_roles) &&<Resource name="roles" list={roles.list}  edit={(superAdmin || put_roles)? roles.edit: null} create={ (superAdmin || post_roles)? roles.create: null} show={roles.show}/>,
                         (superAdmin || get_permissions) &&<Resource name="permissions" list={permissionsResource.list}  edit={permissionsResource.edit} create={permissionsResource.create} show={ShowGuesser}/>,
                         (superAdmin || get_posts) &&
                             <Resource name="posts" list={posts.list}  edit={posts.edit} show={ShowGuesser}  create={posts.create}/>,

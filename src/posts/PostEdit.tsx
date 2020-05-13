@@ -10,8 +10,6 @@ import { configureQuill, toolbarOptions } from './QuillEditorConfig';
 
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 
-import './posts.css';
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     editor: {
@@ -28,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const PostEditToolbar = (props: any) =>{
     const { permissions } = usePermissions();
     let remove_posts: boolean = false;
-    let superAdmin:boolean = false;
+    let superAdmin: boolean = false;
     if(permissions){
         remove_posts = permissions.includes('remove_posts');
         superAdmin = permissions.includes('superAdmin');

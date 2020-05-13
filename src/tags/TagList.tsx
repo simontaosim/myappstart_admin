@@ -13,7 +13,7 @@ export default (props:any) => {
     const { permissions } = usePermissions();
 
     return (
-        <List {...props}>
+        <List {...props}    sort={{ field: 'id', order: 'DESC' }}>
             <Datagrid rowClick="edit" isRowSelectable={ (record:any) => {
                 if(permissions){
                     if(permissions.includes("superAdmin") ){

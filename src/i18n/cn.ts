@@ -3,6 +3,7 @@ import { TranslationMessages } from 'ra-core';
 const customEnglishMessages: TranslationMessages = {
     PASSWORD_REPEAT_WRONG: '两次密码不一致',
     USERNAME_ALREADY_EXIST: '用户名已存在',
+    ROLE_ALREADY_EXIST: '角色名已存在',
     BODY_REQUIRE_MORE_THAN_50: "文章内容需要多于50个字符",
     BODY_REQUIRED: '文章内容不得为空',
     TITLE_REQUIRED: '文章标题不得为空',

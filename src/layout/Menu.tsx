@@ -10,6 +10,7 @@ import { AppState } from '../types';
 import roles from '../roles';
 import users from '../users';
 import posts from '../posts';
+import tags from '../tags';
 
 
 interface Props {
@@ -58,7 +59,7 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                  primaryText={translate(`resources.tags.name`, {
                      smart_count: 2,
                  })}
-                 leftIcon={<posts.icon />}
+                 leftIcon={<tags.icon />}
                  onClick={onMenuClick}
                  sidebarIsOpen={open}
                  dense={dense}
